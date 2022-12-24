@@ -1,4 +1,4 @@
-const express = require ('express');
+const express = require('express');
 require('dotenv').config()
 const app = express();
 const morgan = require('morgan');
@@ -13,7 +13,7 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Regular Middleware
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 
 // Cookies and file Middleware
 app.use(cookieParser());
@@ -23,10 +23,12 @@ app.use(fileupload());
 app.use(morgan("tiny"))
 
 // Import all routes here
-const home = require('./routes/home')
+const home = require('./routes/home');
+const user = require('./routes/user');
 
 // router Middleware
-app.use('/api/v1',home)
+app.use('/api/v1', home);
+app.use('/api/v1', user);
 
 // Export app.js
 module.exports = app;
